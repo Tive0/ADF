@@ -1,0 +1,28 @@
+{
+	"name": "Parquet_HandyCandy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "JSON",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"StorageContainerName": {
+				"type": "string",
+				"defaultValue": "handycandyparquet"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": {
+					"value": "@dataset().StorageContainerName",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
