@@ -35,6 +35,9 @@
 				},
 				{
 					"name": "AddColumn"
+				},
+				{
+					"name": "SelectColumns"
 				}
 			],
 			"scriptLines": [
@@ -74,7 +77,17 @@
 				"     broadcast: 'auto')~> ExchangeRatesLookUp",
 				"ExchangeRatesLookUp derive(SalesValueUSD = {Units Sold} * {Units Sold} * ExchangeRate,",
 				"          Retailer = 'Jolly Good Ltd',",
-				"          RunSeqNo = $RunSeqNo) ~> AddColumn"
+				"          RunSeqNo = $RunSeqNo) ~> AddColumn",
+				"AddColumn select(mapColumn(",
+				"          SalesMonth = Period,",
+				"          Product,",
+				"          UnitsSold = {Units Sold},",
+				"          SalesValueUSD,",
+				"          Retailer,",
+				"          RunSeqNo",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectColumns"
 			]
 		}
 	}
