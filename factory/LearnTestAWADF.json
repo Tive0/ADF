@@ -1,0 +1,9 @@
+{
+	"name": "LearnTestAWADF",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c2409d5b-4449-4e34-ae0c-813a17b20b00",
+		"tenantId": "c6fdda18-8394-4220-925c-eec066ce5625"
+	}
+}
