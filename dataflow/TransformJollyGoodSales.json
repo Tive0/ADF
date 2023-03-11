@@ -32,9 +32,15 @@
 				},
 				{
 					"name": "ExchangeRatesLookUp"
+				},
+				{
+					"name": "AddColumn"
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     RunSeqNo as integer (-1)",
+				"}",
 				"source(output(",
 				"          Period as date,",
 				"          Product as string,",
@@ -65,7 +71,10 @@
 				"     && Period == Date,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> ExchangeRatesLookUp"
+				"     broadcast: 'auto')~> ExchangeRatesLookUp",
+				"ExchangeRatesLookUp derive(SalesValueUSD = {Units Sold} * {Units Sold} * ExchangeRate,",
+				"          Retailer = 'Jolly Good Ltd',",
+				"          RunSeqNo = $RunSeqNo) ~> AddColumn"
 			]
 		}
 	}
