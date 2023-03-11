@@ -1,0 +1,17 @@
+{
+	"name": "JSON",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LearnTestKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "BlobTestLearnConnectionString"
+			}
+		}
+	}
+}
