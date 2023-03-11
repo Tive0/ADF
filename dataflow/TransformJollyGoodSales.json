@@ -25,10 +25,13 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "Filter"
+					"name": "FilterJollyGoodSales"
 				},
 				{
 					"name": "RatesToUSD"
+				},
+				{
+					"name": "ExchangeRatesLookUp"
 				}
 			],
 			"scriptLines": [
@@ -56,8 +59,13 @@
 				"     fileName: 'ExchangeRates.xlsx',",
 				"     sheetName: 'Sheet1',",
 				"     firstRowAsHeader: true) ~> ExchangeRates",
-				"JollyGoodSales filter(Product != 'Month Total') ~> Filter",
-				"ExchangeRates filter(ToCurrency == 'USD') ~> RatesToUSD"
+				"JollyGoodSales filter(Product != 'Month Total') ~> FilterJollyGoodSales",
+				"ExchangeRates filter(ToCurrency == 'USD') ~> RatesToUSD",
+				"FilterJollyGoodSales, RatesToUSD lookup(Currency == FromCurrency",
+				"     && Period == Date,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> ExchangeRatesLookUp"
 			]
 		}
 	}
