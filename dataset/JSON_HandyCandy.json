@@ -1,0 +1,27 @@
+{
+	"name": "JSON_HandyCandy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "JSON",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"StorageContainerName": {
+				"type": "string",
+				"defaultValue": "HandyCandy"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": {
+					"value": "@dataset().StorageContainerName",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}
